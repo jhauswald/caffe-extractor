@@ -92,18 +92,25 @@ int main(int argc, char** argv) {
 
   vector<Blob<float>*> in_blobs = net->input_blobs();
   in_blobs[0]->set_cpu_data((float*)data);
+  std::ofstream ofs ("input.out");
+  LOG(INFO) << "Dumping input data";
+
+  for(int d = 0; d < net->blobs()[0]->count(); ++d)
+    ofs << net->blobs()[0]->cpu_data()[d] << "\n";
+
   for(int i = 0; i < tolayer; ++i) {
     net->ForwardFromTo(i,i);
-    string filename = "layer_" + to_string(i) + ".out";
-    std::ofstream ofs (filename.c_str());
-    LOG(INFO) << "Dumping " << filename;
-    ofs << net->blobs()[i]->num() << " "
-        << net->blobs()[i]->channels() << " "
-        << net->blobs()[i]->height() << " "
-        << net->blobs()[i]->width() << endl;
+    string filename = "layer" + to_string(i) + ".out";
+    std::ofstream ofs(filename.c_str());
+    ofs << net->blobs()[i+1]->num() << " "
+        << net->blobs()[i+1]->channels() << " "
+        << net->blobs()[i+1]->height() << " "
+        << net->blobs()[i+1]->width() << endl;
 
-    for(int d = 0; d < net->blobs()[i]->count(); ++d)
-      ofs << net->blobs()[i]->cpu_data()[d] << "\n";
+    for(int d = 0; d < net->blobs()[i+1]->count(); ++d)
+      ofs << net->blobs()[i+1]->cpu_data()[d] << "\n";
+    // for(int d = 0; d < net->blobs()[i+1]->count(); ++d)
+    //   t << net->blobs()[i]->cpu_data()[d] << "\n";
   }
 
   free(net);
