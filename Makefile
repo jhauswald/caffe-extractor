@@ -1,10 +1,8 @@
-COMMON=.
-include $(COMMON)/Makefile.config
+CAFFE=/home/jahausw/projects/caffe/distribute
 
 CXX = g++
 CXX_FLAGS  = -O3 -std=c++11 \
 						 -fpermissive \
-						 -I$(COMMON)/include \
 						 -I$(CAFFE)/include \
 						 -I$(CUDA)/include
 
