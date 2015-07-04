@@ -1,0 +1,5 @@
+extractor
+*.out
+*.prototxt
+*.caffemodel
+*.o
