@@ -6,4 +6,4 @@ Dumps activations after each layer into text files.
 
 Todo:
 - Name output files as layer names
-- Bounds checking if tolayer > sizeof(network)
+- Layer counting is off

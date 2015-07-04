@@ -98,6 +98,8 @@ int main(int argc, char** argv) {
   for(int d = 0; d < net->blobs()[0]->count(); ++d)
     ofs << net->blobs()[0]->cpu_data()[d] << "\n";
 
+  tolayer = tolayer <= net->layers().size() ? tolayer : net->layers().size();
+  LOG(INFO) << "Forwarding " << tolayer << " layers.";
   for(int i = 0; i <= tolayer; ++i) {
     net->ForwardTo(i);
     string filename = "layer" + to_string(i) + ".out";

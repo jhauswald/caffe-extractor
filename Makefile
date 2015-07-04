@@ -1,10 +1,11 @@
 CAFFE=/home/jahausw/projects/caffe/distribute
+CUDA=/usr/local/cuda
 
 CXX = g++
 CXX_FLAGS  = -O3 -std=c++11 \
 						 -fpermissive \
 						 -I$(CAFFE)/include \
-						 -I$(CUDA)/include
+						 -I$(CUDA)/include \
 
 ifeq ($(CPU_ONLY), 1)
 	CXX_FLAGS  += -DCPU_ONLY
